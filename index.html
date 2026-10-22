@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b6e4f"><title>FamFi — Family Budget Planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">₹</span> Fam<span>Fi</span></a><nav>
+<button class="nav active" data-view="dashboard">Dashboard</button><button class="nav" data-view="planner">Budget planner</button><button class="nav" data-view="expenses">Expenses</button><button class="nav" data-view="report">Monthly report</button>
+</nav></header>
+<main>
+<section class="hero"><div><p class="eyebrow">YOUR FAMILY FINANCE COMPANION</p><h1>Make every rupee <span>count.</span></h1><p class="sub">Plan your monthly budget, track daily spending, and build better money habits together.</p></div><div class="month-box"><label for="month">Planning month</label><input type="month" id="month"></div></section>
+<div id="notice" class="notice" hidden></div>
+<section class="view" id="dashboard">
+<div class="section-head"><div><h2>Monthly overview</h2><p>A clear picture of your household finances.</p></div><button class="btn" data-goto="planner">＋ Plan your budget</button></div>
+<div class="stats"><article class="stat"><span>Monthly income</span><strong id="dashIncome">₹0</strong><small>Income you entered</small></article><article class="stat"><span>Planned budget</span><strong id="dashBudget">₹0</strong><small>Including optional costs</small></article><article class="stat"><span>Total spent</span><strong id="dashSpent">₹0</strong><small>Expenses recorded</small></article><article class="stat"><span>Budget remaining</span><strong id="dashLeft">₹0</strong><small>Planned budget minus spending</small></article></div>
+<div class="two-col"><article class="panel"><div class="panel-title"><h3>Budget vs spending</h3><span class="pill">By category</span></div><div id="budgetBars" class="bars"></div></article><article class="panel"><div class="panel-title"><h3>Recent expenses</h3><button class="text-btn" data-goto="expenses">View all →</button></div><div id="recentExpenses"></div></article></div>
+<div class="tip"><div class="tip-icon">✦</div><div><b>Small steps make a difference</b><p>Set a realistic plan, record purchases as they happen, and review your report at month end.</p></div></div>
+</section>
+<section class="view" id="planner" hidden>
+<div class="section-head"><div><h2>Monthly budget planner</h2><p>Your profile helps create a suggested budget. You can edit every amount.</p></div></div>
+<form id="profileForm" class="panel">
+<h3>Family profile</h3><div class="form-grid">
+<label>Monthly income (₹)<input type="number" min="0" step="1" id="income" placeholder="e.g. 30000"></label>
+<label>Other monthly income (₹)<input type="number" min="0" step="1" id="otherIncome" placeholder="0"></label>
+<label>Family members<input type="number" min="1" max="50" id="members" value="1"></label>
+<label>Living area<select id="area"><option value="metro">Metro</option><option value="city">City</option><option value="town" selected>Town</option><option value="village">Village</option></select></label>
+</div>
+<h3 class="subhead">Optional monthly expenses</h3><p class="hint">These start at ₹0. Enter an amount only if it applies to your family.</p><div class="form-grid three">
+<label>Rent (₹)<input type="number" min="0" id="rent" placeholder="0"></label><label>EMI (₹)<input type="number" min="0" id="emi" placeholder="0"></label><label>Insurance premium (₹)<input type="number" min="0" id="insurance" placeholder="0"></label>
+</div>
+<div class="form-actions"><button class="btn secondary" type="button" id="generate">Generate suggested budget</button><button class="btn" type="submit">Save profile & budget</button></div>
+</form>
+<form id="budgetForm" class="panel"><div class="panel-title"><div><h3>Budget categories</h3><p class="hint">Amounts are saved for the selected month.</p></div><strong id="budgetTotal">₹0</strong></div><div id="budgetFields" class="budget-fields"></div><div class="form-actions"><button class="btn" type="submit">Save monthly budget</button></div></form>
+</section>
+<section class="view" id="expenses" hidden>
+<div class="section-head"><div><h2>Daily expenses</h2><p>Record purchases to keep your monthly totals accurate.</p></div></div>
+<form id="expenseForm" class="panel"><h3>Add an expense</h3><div class="form-grid">
+<label>Date<input type="date" id="expDate" required></label><label>Category<select id="expCategory"></select></label><label>Amount (₹)<input type="number" id="expAmount" min="0.01" step="0.01" required placeholder="0.00"></label><label class="wide">Note<input id="expNote" maxlength="200" placeholder="e.g. Vegetables from market"></label>
+</div><div class="form-actions"><button class="btn" type="submit">＋ Add expense</button></div></form>
+<div class="panel"><div class="panel-title"><h3>Expense history</h3><strong id="expenseTotal">₹0</strong></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th class="right">Amount</th><th></th></tr></thead><tbody id="expenseRows"></tbody></table></div><p id="emptyExpenses" class="empty">No expenses for this month yet.</p></div>
+</section>
+<section class="view" id="report" hidden>
+<div class="section-head"><div><h2>Monthly report</h2><p>Review spending and spot opportunities to save.</p></div><button class="btn secondary" id="exportCsv">Export expenses CSV</button></div>
+<div class="stats"><article class="stat"><span>Total spent</span><strong id="reportSpent">₹0</strong></article><article class="stat"><span>Planned budget</span><strong id="reportBudget">₹0</strong></article><article class="stat"><span>Budget remaining</span><strong id="reportLeft">₹0</strong></article><article class="stat"><span>Daily average</span><strong id="dailyAvg">₹0</strong></article></div>
+<div class="two-col"><article class="panel"><h3>Category breakdown</h3><div id="reportBars" class="bars"></div></article><article class="panel"><h3>Insights</h3><div id="insights" class="insights"></div></article></div>
+</section>
+<footer><span>FamFi · Family Budget Planner</span><span>Demo data is stored in this browser only.</span></footer>
+</main><script src="app.js"></script></body></html>
